@@ -15,62 +15,66 @@ public class Main {
             sc.nextLine(); // Consumir a quebra de linha pendente
 
             if (option == 1) {
-            	operation.Listar();
-            } 
+            	operation.List();
+            }
             else if (option == 2) {
-            	
+
             	int productStock = 0;
-            	
+
                 System.out.print("Enter the product name:");
                 String productName = sc.nextLine();
 
                 System.out.print("Enter the product code:");
                 int productCode = Integer.parseInt(sc.nextLine());
-                
-                System.out.println("Add stock to product ? (1 - YES, 2 - NO):");
-                
-                int addOption = sc.nextInt();
-                
-                if (addOption == 1) {
-                    System.out.print("Enter the stock quantity: ");
-                    productStock = sc.nextInt();
-                }
-                else {
-                	System.out.println("retorno");
-                }
 
-                operation.registerProduct(productName,productCode,productStock);
-                
-            } 
+                if (operation.locatePerCode(productCode) == null){
+                    System.out.println("Do you want to add more stock?\n(1) Yes (2) No");
+                    int optionStock = Integer.parseInt(sc.nextLine());
+                    if (optionStock == 1){
+                        System.out.println("Enter the stock quantity");
+                        productStock = Integer.parseInt(sc.nextLine());
+                        operation.registerProduct(productName,productCode,productStock);
+                        System.out.println("Product added successfully");
+                    }
+                    else {
+                        System.out.println("Product added successfully");
+                        operation.registerProduct(productName,productCode,productStock);
+                    }
+                }
+                else{
+                    System.out.println("Product code already in use");
+                }
+            }
             else if (option == 3) {
             	System.out.print("Enter the product code:");
                 int productCode = Integer.parseInt(sc.nextLine());
-                
+
                 System.out.print("Enter the stock quantity: ");
                 int productStock = Integer.parseInt(sc.nextLine());
-                
+
                 operation.addStock(productStock, productCode);
-                
-            } 
+
+            }
             else if (option == 4) {
             	System.out.print("Enter the product code: ");
                 int productCode = Integer.parseInt(sc.nextLine());
                 operation.deleteProduct(productCode);
 
-            } 
+
+            }
             else if (option == 5) {
             	System.out.print("Enter the product code: ");
                 int productCode = Integer.parseInt(sc.nextLine());
-                
+
                 System.out.print("Enter the quantity to be sold: ");
                 int productStock = Integer.parseInt(sc.nextLine());
-                
-                operation.removeStock(productStock, productCode);    
-            } 
+
+                operation.removeStock(productStock, productCode);
+            }
             else if (option != 6) {
                 System.out.println("Invalid Option !");
             }
         }
     }
 }
-    
+

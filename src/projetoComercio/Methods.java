@@ -5,47 +5,50 @@ import java.util.ArrayList;
 public class Methods {
 	ArrayList<Products> products = new ArrayList<Products>();
 	
-	public void Listar() {
+	public void List() {
         if (products.isEmpty()) {
-            System.out.println("\nNenhum produto cadastrado no sistema!\n");
-        } 
+            System.out.println("\nNo Product Registered Yet!!\n");
+        }
         else {
-        	int contador = 0;
+        	int counter = 0;
             for (Products product : products) {
-            	contador += 1;
-                System.out.println(contador + ") " + product.getName() + " | código: " + product.getCode() + " | estoque: " + product.getStockQuantity() + "\n");
+            	counter += 1;
+				System.out.println((counter + ") " + product.getName() + " | code: " + product.getCode() + " | stock: " + product.getStockQuantity() + "\n"));
             }
         }
+    }
+	public void registerProduct(String productName, int productCode, int productStock) {
+		Products newProduct = new Products();
+		Products product = locatePerCode(productCode);
+		if (product == null) {
+			newProduct.setName(productName);
+			newProduct.setCode(productCode);
+			products.add(newProduct);
+			addStock(productStock, productCode);
+		}
 	}
-	public void registerProduct(String nomeProduto, int codigoProduto,int estoqueProduto) {
-		Products produtoNovo = new Products();
-        produtoNovo.setName(nomeProduto);
-        produtoNovo.setCode(codigoProduto);
-        products.add(produtoNovo);   		 
-        addStock(estoqueProduto, codigoProduto);
-	}
-	public void addStock(int estoqueProduto, int codigoProduto) {
-		Products product = locatePerCode(codigoProduto);	
-		product.addStockPerCode(estoqueProduto);
+	public void addStock(int productStock, int productCode) {
+		Products product = locatePerCode(productCode);
+		product.addStockPerCode(productStock);
 	}
 		
 	
-	public Products locatePerCode(int codigoProduto) {
+	public Products locatePerCode(int productCode) {
 		for (Products product : products) {
-			if (product.getCode() == codigoProduto) {
+			if (product.getCode() == productCode) {
 				return product;
 			}
 		}
-		return null;
-	}
-	public void deleteProduct(int codigoProduto) {
-		Products product = locatePerCode(codigoProduto);
-		int index = products.indexOf(product);
-		products.remove(index);
+        return null;
+    }
+
+	public void deleteProduct(int productCode) {
+		Products product = locatePerCode(productCode);
+		products.remove(product);
 		
 	}
-	public void removeStock(int estoqueProduto, int codigoProduto) {
-		Products product = locatePerCode(codigoProduto);	
-		product.removeStockPerCode(estoqueProduto);
+	public void removeStock(int productStock, int productCode) {
+		Products product = locatePerCode(productCode);
+		product.removeStockPerCode(productStock);
 	}
 }
