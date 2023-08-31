@@ -28,7 +28,7 @@ public class Main {
                 int productCode = Integer.parseInt(sc.nextLine());
 
                 if (operation.locatePerCode(productCode) == null){
-                    System.out.println("Do you want to add more stock?\n(1) Yes (2) No");
+                    System.out.println("Do you want to add stock?\n(1) Yes (2) No");
                     int optionStock = Integer.parseInt(sc.nextLine());
                     if (optionStock == 1){
                         System.out.println("Enter the stock quantity");
@@ -73,8 +73,10 @@ public class Main {
             }
             else if (option != 6) {
                 System.out.println("Invalid Option !");
+             
             }
         }
+        sc.close();
     }
 }
 

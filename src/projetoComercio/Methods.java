@@ -13,19 +13,17 @@ public class Methods {
         	int counter = 0;
             for (Products product : products) {
             	counter += 1;
-				System.out.println((counter + ") " + product.getName() + " | code: " + product.getCode() + " | stock: " + product.getStockQuantity() + "\n"));
+				System.out.println((counter + ") " + product.getName() + " (code.: " + product.getCode() + " | " + "stock: " + product.getStockQuantity() +")" + "\n"));
             }
         }
     }
 	public void registerProduct(String productName, int productCode, int productStock) {
 		Products newProduct = new Products();
-		Products product = locatePerCode(productCode);
-		if (product == null) {
-			newProduct.setName(productName);
-			newProduct.setCode(productCode);
-			products.add(newProduct);
-			addStock(productStock, productCode);
-		}
+		newProduct.setName(productName);
+		newProduct.setCode(productCode);
+		products.add(newProduct);
+		addStock(productStock, productCode);
+		
 	}
 	public void addStock(int productStock, int productCode) {
 		Products product = locatePerCode(productCode);
