@@ -47,4 +47,17 @@ public class Methods {
 		Products product = locatePerCode(productCode);
 		product.removeStockPerCode(productStock);
 	}
+    public void Loading() {
+    	System.out.println("Loading...");
+        LoadingDelay(1500);
+        System.out.println("Loading complete ✔️");
+    }
+    private void LoadingDelay(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Error during loading" + e.getMessage());
+        }
+    }
  }
