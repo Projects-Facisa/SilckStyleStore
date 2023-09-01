@@ -1,27 +1,27 @@
-## ByteBlazeStore - Projeto de Comércio em Java 💼🛍️
+## ByteBlazeStore - Java Commerce Project 💼🛍️
 
-Projeto desenvolvido sob orientação do professor Armando Agra para a disciplina do módulo 2 - Programação Orientada a Objetos Básica em Java. ByteBlazeStore é um sistema de comércio que oferece as seguintes funcionalidades:
+Project developed under the guidance of Professor Armando Agra for the module 2 - Basic Object-Oriented Programming in Java. ByteBlazeStore is a commerce system that offers the following functionalities:
 
-# Funcionalidades 🚀
+# Features 🚀
 
-1 - Listar todos os produtos 📜
+1 - List all products 📜
 
-2 - Cadastrar um novo produto ➕
+2 - Register a new product ➕
 
-3 - Adicionar estoque de um produto 📦
+3 - Add stock to a product 📦
 
-4 - Remover um produto do comércio 🗑️
+4 - Remove a product from the commerce 🗑️
 
-5 - Vender algum produto existente 💲
+5 - Sell an existing product 💲
 
-6 - Sair do programa 🚪
+6 - Exit the program 🚪
 
-# Como Usar 📋
+# How to use 📋
 
-1 - Clone este repositório para o seu ambiente local.
+1 - Clone this repository to your local environment.
 
-2 - Abra o projeto em sua IDE Java preferida.
+2 - Open the project in your preferred Java IDE.
 
-3 - Compile e execute o programa.
+3 - Compile and run the program.
 
-4 - Siga as instruções no terminal para navegar pelas funcionalidades.
+4 - Follow the instructions in the terminal to navigate through the functionalities.
