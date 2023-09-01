@@ -50,7 +50,7 @@ public class Main {
                             System.out.println(" code: " + product.getCode() + ", " + "stock: " + product.getStockQuantity()+ "\n");
                         }
                     } else {
-                        System.out.println("Product code already in use");
+                        System.out.println("Product code already in use ❌");
                     }
                     break;
                 case 3:
@@ -58,11 +58,13 @@ public class Main {
                     productCode = Integer.parseInt(sc.nextLine());
                     
                     if (operation.locatePerCode(productCode) == null) {
-                    	System.out.println("The code entered does not exist");
+                    	System.out.println("The code entered does not exist ❌");
                     } else {
                         System.out.print("Enter the stock quantity: ");
                         productStock = Integer.parseInt(sc.nextLine());
 
+
+                        System.out.println("Stock added successfully ✔️");
                         operation.addStock(productStock, productCode);
                     }
                     break;
@@ -71,11 +73,12 @@ public class Main {
                     productCode = Integer.parseInt(sc.nextLine());
                     
                     if (operation.locatePerCode(productCode) == null) {
-                    	System.out.println("The code entered does not exist");
+                    	System.out.println("The code entered does not exist ❌");
                     } 
                     else {
 	                    if (operation.locatePerCode(productCode).getStockQuantity() == 0) {
-	                        operation.deleteProduct(productCode);
+                            System.out.println("Product removed successfully ✔️");
+                            operation.deleteProduct(productCode);
 	                    } 
 	                    else {
 	                        System.out.println("there's still stock of this product in the market");
@@ -83,8 +86,9 @@ public class Main {
 	                        int optionRemove = Integer.parseInt(sc.nextLine());
 	                        
 	                        if (optionRemove == 1) {
-	                            operation.deleteProduct(productCode);
-	                        } 
+                                System.out.println("Product removed successfully ✔️");
+                                operation.deleteProduct(productCode);
+	                        }
 	                        else {
 	                            System.out.println("Returning...");
 	                        	}
@@ -96,17 +100,18 @@ public class Main {
                     productCode = Integer.parseInt(sc.nextLine());
                     
                     if (operation.locatePerCode(productCode) == null) {
-                    	System.out.println("The code entered does not exist");
+                    	System.out.println("The code entered does not exist ❌");
                     }
                     else {
 	                    System.out.print("Enter the quantity to be sold: ");
 	                    productStock = Integer.parseInt(sc.nextLine());
 	
 	                    if (operation.locatePerCode(productCode).getStockQuantity() - productStock < 0) {
-	                        System.out.println("Not Enough Stock to sell");
+	                        System.out.println("Not Enough Stock to sell ❌");
 	                    } 
 	                    else {
-	                        operation.removeStock(productStock, productCode);
+                            System.out.println("Product sold successfully ✔️");
+                            operation.removeStock(productStock, productCode);
 	                    }
                     }
                     break;
@@ -114,7 +119,7 @@ public class Main {
                     System.out.println("Exiting ByteBlazeStore Thank You!");
                     break;
                 default:
-                    System.out.println("Invalid Option, please try again !");
+                    System.out.println("Invalid Option, please try again ❌");
                     break;
             }
         }
