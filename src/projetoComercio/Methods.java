@@ -47,4 +47,4 @@ public class Methods {
 		Products product = locatePerCode(productCode);
 		product.removeStockPerCode(productStock);
 	}
-}
+ }
