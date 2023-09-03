@@ -51,6 +51,7 @@ public class Main {
                         }
                     } else {
                         System.out.println("Product code already in use ❌");
+                        System.out.println("Returning...");
                     }
                     break;
                 case 3:
@@ -59,6 +60,7 @@ public class Main {
                     
                     if (operation.locatePerCode(productCode) == null) {
                     	System.out.println("The code entered does not exist ❌");
+                    	System.out.println("Returning...");
                     } else {
                         System.out.print("Enter the stock quantity: ");
                         productStock = Integer.parseInt(sc.nextLine());
@@ -74,6 +76,7 @@ public class Main {
                     
                     if (operation.locatePerCode(productCode) == null) {
                     	System.out.println("The code entered does not exist ❌");
+                    	System.out.println("Returning...");
                     } 
                     else {
 	                    if (operation.locatePerCode(productCode).getStockQuantity() == 0) {
@@ -81,7 +84,7 @@ public class Main {
                             operation.deleteProduct(productCode);
 	                    } 
 	                    else {
-	                        System.out.println("there's still stock of this product in the market");
+	                        System.out.println("There's still stock of this product in the market");
 	                        System.out.println("(1) Remove anyway (2) Cancel operation");               
 	                        int optionRemove = Integer.parseInt(sc.nextLine());
 	                        
@@ -90,6 +93,7 @@ public class Main {
                                 operation.deleteProduct(productCode);
 	                        }
 	                        else {
+	                        	System.out.println("Operation Cancelled ❌");
 	                            System.out.println("Returning...");
 	                        	}
 	                    	}
@@ -101,6 +105,7 @@ public class Main {
                     
                     if (operation.locatePerCode(productCode) == null) {
                     	System.out.println("The code entered does not exist ❌");
+                    	System.out.println("Returning...");
                     }
                     else {
 	                    System.out.print("Enter the quantity to be sold: ");
@@ -108,6 +113,7 @@ public class Main {
 	
 	                    if (operation.locatePerCode(productCode).getStockQuantity() - productStock < 0) {
 	                        System.out.println("Not Enough Stock to sell ❌");
+	                        System.out.println("Returning...");
 	                    } 
 	                    else {
                             System.out.println("Product sold successfully ✔️");
@@ -116,7 +122,7 @@ public class Main {
                     }
                     break;
                 case 6:
-                    System.out.println("Exiting ByteBlazeStore Thank You!");
+                    System.out.println("Exiting ByteBlazeStore, Thank You!");
                     break;
                 default:
                     System.out.println("Invalid Option, please try again ❌");
