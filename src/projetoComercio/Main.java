@@ -13,6 +13,8 @@ public class Main {
             System.out.println("                                 [--- MAIN MENU ---]\n");
             System.out.println("(1) List All (2) Register Product (3) Add Stock (4) Remove Product (5) Sell Product (6) Exit");
             option = Integer.parseInt(sc.nextLine());
+            int productStock;
+            int productCode;
 
             switch (option) {
                 case 1:
@@ -20,32 +22,32 @@ public class Main {
                     operation.List();
                     break;
                 case 2:
-                    int productStock = 0;
+                    productStock = 0;
 
                     System.out.print("Enter the product name:");
                     String productName = sc.nextLine();
 
                     System.out.print("Enter the product code:");
-                    int productCode = Integer.parseInt(sc.nextLine());
+                    productCode = Integer.parseInt(sc.nextLine());
 
                     if (operation.locatePerCode(productCode) == null) {
-                    	
+
                         System.out.println("Do you want to add stock?\n(1) Yes (2) No");
                         int optionStock = Integer.parseInt(sc.nextLine());
-                        
-                        if (optionStock == 1) {                   	
+
+                        if (optionStock == 1) {
                             System.out.println("Enter the stock quantity");
                             productStock = Integer.parseInt(sc.nextLine());
-                            
+
                             operation.registerProduct(productName, productCode, productStock);
                             Products product = operation.locatePerCode(productCode);
-                            
+
                             System.out.print((product.getName() + " added successfully."));
-                            System.out.println(" code: " + product.getCode() + ", " + "stock: " + product.getStockQuantity() + "\n");   
+                            System.out.println(" code: " + product.getCode() + ", " + "stock: " + product.getStockQuantity() + "\n");
                         } else {
                             operation.registerProduct(productName, productCode, productStock);
                             Products product = operation.locatePerCode(productCode);
-                            
+
                             System.out.print((product.getName() + " added successfully."));
                             System.out.println(" code: " + product.getCode() + ", " + "stock: " + product.getStockQuantity()+ "\n");
                         }
@@ -57,7 +59,7 @@ public class Main {
                 case 3:
                     System.out.print("Enter the product code:");
                     productCode = Integer.parseInt(sc.nextLine());
-                    
+
                     if (operation.locatePerCode(productCode) == null) {
                     	System.out.println("The code entered does not exist ❌");
                     	System.out.println("Returning...");
@@ -73,21 +75,21 @@ public class Main {
                 case 4:
                     System.out.print("Enter the product code: ");
                     productCode = Integer.parseInt(sc.nextLine());
-                    
+
                     if (operation.locatePerCode(productCode) == null) {
                     	System.out.println("The code entered does not exist ❌");
                     	System.out.println("Returning...");
-                    } 
+                    }
                     else {
 	                    if (operation.locatePerCode(productCode).getStockQuantity() == 0) {
                             System.out.println("Product removed successfully ✔️");
                             operation.deleteProduct(productCode);
-	                    } 
+	                    }
 	                    else {
 	                        System.out.println("There's still stock of this product in the market");
-	                        System.out.println("(1) Remove anyway (2) Cancel operation");               
+	                        System.out.println("(1) Remove anyway (2) Cancel operation");
 	                        int optionRemove = Integer.parseInt(sc.nextLine());
-	                        
+
 	                        if (optionRemove == 1) {
                                 System.out.println("Product removed successfully ✔️");
                                 operation.deleteProduct(productCode);
@@ -102,7 +104,7 @@ public class Main {
                 case 5:
                     System.out.print("Enter the product code: ");
                     productCode = Integer.parseInt(sc.nextLine());
-                    
+
                     if (operation.locatePerCode(productCode) == null) {
                     	System.out.println("The code entered does not exist ❌");
                     	System.out.println("Returning...");
@@ -110,11 +112,11 @@ public class Main {
                     else {
 	                    System.out.print("Enter the quantity to be sold: ");
 	                    productStock = Integer.parseInt(sc.nextLine());
-	
+
 	                    if (operation.locatePerCode(productCode).getStockQuantity() - productStock < 0) {
 	                        System.out.println("Not Enough Stock to sell ❌");
 	                        System.out.println("Returning...");
-	                    } 
+	                    }
 	                    else {
                             System.out.println("Product sold successfully ✔️");
                             operation.removeStock(productStock, productCode);
