@@ -36,14 +36,18 @@ public class Main {
                         int optionStock = Integer.parseInt(sc.nextLine());
 
                         if (optionStock == 1) {
-                            System.out.println("Enter the stock quantity");
+                            System.out.println("Enter the stock quantity:");
                             productStock = Integer.parseInt(sc.nextLine());
-
-                            operation.registerProduct(productName, productCode, productStock);
-                            Products product = operation.locatePerCode(productCode);
-
-                            System.out.print((product.getName() + " added successfully."));
-                            System.out.println(" code: " + product.getCode() + ", " + "stock: " + product.getStockQuantity() + "\n");
+                            if (productStock < 0) {
+                            	System.out.println("It was not possible to add the product because the stock entered is negative ❌");
+                            }
+                            else {
+	                            operation.registerProduct(productName, productCode, productStock);
+	                            Products product = operation.locatePerCode(productCode);
+	
+	                            System.out.print(product.getName() + " added successfully.");
+	                            System.out.println(" code: " + product.getCode() + ", " + "stock: " + product.getStockQuantity() + "\n");
+                            }
                         } else {
                             operation.registerProduct(productName, productCode, productStock);
                             Products product = operation.locatePerCode(productCode);
