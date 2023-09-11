@@ -7,23 +7,20 @@ public class Products {
 		public String name;
 		
 		public int stockQuantity;
-	
-		public int getCode() {
+
+    public Products(String productName, int productCode) {
+		this.name = productName;
+		this.code = productCode;
+    }
+
+    public int getCode() {
 			return code;
 		}
-	
-		public void setCode(int code) {
-			this.code = code;
-		}
-	
+
 		public String getName() {
 			return name;
 		}
-	
-		public void setName(String name) {
-			this.name = name;
-		}
-	
+
 		public int getStockQuantity() {
 			return stockQuantity;
 		}

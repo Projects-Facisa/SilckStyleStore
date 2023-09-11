@@ -16,9 +16,7 @@ public class Methods {
 		}
 	}
 	public void registerProduct(String productName, int productCode, int productStock) {
-		Products newProduct = new Products();
-		newProduct.setName(productName);
-		newProduct.setCode(productCode);
+		Products newProduct = new Products(productName,productCode);
 		products.add(newProduct);
 		addStock(productStock, productCode);
 
