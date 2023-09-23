@@ -3,6 +3,7 @@ package projetoComercio;
 import java.util.ArrayList;
 
 public class Methods {
+	
 	public ArrayList<Products> products = new ArrayList<Products>();
 
 	public void List() {
@@ -15,9 +16,8 @@ public class Methods {
 			System.out.println((counter + ") " + product.getName() + " (code.: " + product.getCode() + " | " + "stock: " + product.getStockQuantity() +")" + "\n"));
 		}
 	}
-	public void registerProduct(String productName) {
-	    Products newProduct = new Products(productName);
-	    products.add(newProduct);
+	public void registerProduct(Products product) {
+	    products.add(product);
 	}
 	
 	public void addStock(int productStock, int productCode) {

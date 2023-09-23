@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Methods operation = new Methods();
-        
+           
         int option = 0;
         System.out.println("                      [--- 🔥 WELCOME TO BYTEBLAZE STORE 🔥 ---]");
         operation.Loading();
@@ -22,12 +22,66 @@ public class Main {
                     operation.List();
                     break;
                 case 2:
-                	System.out.print("Enter the product name:");
+                	System.out.println("Enter the product name:");
                     String productName = sc.nextLine();
-
-                    operation.registerProduct(productName);
-                    Products newProduct = operation.products.get(operation.products.size() - 1);
+                    
+                    System.out.println("Enter the product style:");
+                    String productStyle = sc.nextLine();
+                    
+                    System.out.println("Enter the product size:");
+                    String productSize = sc.nextLine();
+                    
+                    System.out.println("Enter the product color:");
+                    String productColor = sc.nextLine();
+                    
+                    System.out.println("Enter the product material:");
+                    String productMaterial = sc.nextLine();
+                    
+                    Products newProduct = new Products(productName, productStyle, productSize, productColor, productMaterial);
+                    
+                    System.out.println("Enter the product Category:");
+                    System.out.println("1) Chest, 2) Legs, 3) Feet");
+                    int productCategory = Integer.parseInt(sc.nextLine());
+                    
+                    switch (productCategory) {
+                    	case 1:
+                    		System.out.println("Enter the cleavage type:");
+                            String productCleavage = sc.nextLine();
+                            
+                            System.out.println("Enter the sleeve type:");
+                            String productSleeve = sc.nextLine();
+                            
+                    		newProduct = new Chest(productName, productStyle, productSize, productColor, productMaterial, productCleavage, productSleeve);
+                    		break;
+                    	case 2:
+                    		System.out.println("Enter the waist:");
+                            String productWaist = sc.nextLine();
+                            
+                            System.out.println("Enter the length:");
+                            String productLength = sc.nextLine();
+                                         
+                            newProduct = new Legs(productName, productStyle, productSize, productColor, productMaterial, productWaist, productLength);
+                    		break;
+                    	case 3:
+                    		System.out.println("Enter the closure type:");
+                            String productClosure = sc.nextLine();
+                            
+                            System.out.println("Enter the heel size:");
+                            String productHeelSize = sc.nextLine();
+                            
+                            System.out.println("Enter the sole type:");
+                            String productSoleType = sc.nextLine();
+                    		
+                            newProduct = new Feet(productName, productStyle, productSize, productColor, productMaterial, productClosure, productHeelSize, productSoleType);
+                    		break;
+                    	default:
+                            System.out.println("Invalid Option, please try again ❌");
+                            break;
+                    } 
+                    
                     productCode = newProduct.getCode();
+                    operation.registerProduct(newProduct);
+                    newProduct = operation.products.get(operation.products.size() - 1);
 
                     System.out.println("Do you want to add stock?\n(1) Yes (2) No");
                     int optionStock = Integer.parseInt(sc.nextLine());
@@ -41,12 +95,12 @@ public class Main {
                         else {
                             operation.addStock(productStock, productCode);
                             System.out.print(newProduct.getName() + " added successfully.");
-                            System.out.println("code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
+                            System.out.println(" code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
                         }
                     } 
                     else {
                         System.out.print(newProduct.getName() + " added successfully.");
-                        System.out.println("code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
+                        System.out.println(" code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
                     }
                     break;
                 case 3:
