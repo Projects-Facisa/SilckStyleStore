@@ -22,58 +22,46 @@ public class Main {
                     operation.List();
                     break;
                 case 2:
-                    productStock = 0;
-
-                    System.out.print("Enter the product name:");
+                	System.out.print("Enter the product name:");
                     String productName = sc.nextLine();
 
-                    System.out.print("Enter the product code:");
-                    productCode = Integer.parseInt(sc.nextLine());
+                    operation.registerProduct(productName);
+                    Products newProduct = operation.products.get(operation.products.size() - 1);
+                    productCode = newProduct.getCode();
 
-                    if (operation.locatePerCode(productCode) == null) {
+                    System.out.println("Do you want to add stock?\n(1) Yes (2) No");
+                    int optionStock = Integer.parseInt(sc.nextLine());
 
-                        System.out.println("Do you want to add stock?\n(1) Yes (2) No");
-                        int optionStock = Integer.parseInt(sc.nextLine());
-
-                        if (optionStock == 1) {
-                            System.out.println("Enter the stock quantity:");
-                            productStock = Integer.parseInt(sc.nextLine());
-                            if (productStock < 0) {
-                            	System.out.println("It was not possible to add the product because the stock entered is negative ❌");
-                            }
-                            else {
-	                            operation.registerProduct(productName, productCode, productStock);
-	                            Products product = operation.locatePerCode(productCode);
-	
-	                            System.out.print(product.getName() + " added successfully.");
-	                            System.out.println(" code: " + product.getCode() + ", " + "stock: " + product.getStockQuantity() + "\n");
-                            }
-                        } else {
-                            operation.registerProduct(productName, productCode, productStock);
-                            Products product = operation.locatePerCode(productCode);
-
-                            System.out.print((product.getName() + " added successfully."));
-                            System.out.println(" code: " + product.getCode() + ", " + "stock: " + product.getStockQuantity()+ "\n");
+                    if (optionStock == 1) {
+                        System.out.println("Enter the stock quantity:");
+                        productStock = Integer.parseInt(sc.nextLine());
+                        if (productStock < 0) {
+                            System.out.println("It was not possible to add the product because the stock entered is negative ❌");
+                        } 
+                        else {
+                            operation.addStock(productStock, productCode);
+                            System.out.print(newProduct.getName() + " added successfully.");
+                            System.out.println("code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
                         }
-                    } else {
-                        System.out.println("Product code already in use ❌");
-                        System.out.println("Returning...");
+                    } 
+                    else {
+                        System.out.print(newProduct.getName() + " added successfully.");
+                        System.out.println("code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
                     }
                     break;
                 case 3:
-                    System.out.print("Enter the product code:");
+                    System.out.print("Enter the product code: ");
                     productCode = Integer.parseInt(sc.nextLine());
 
                     if (operation.locatePerCode(productCode) == null) {
-                    	System.out.println("The code entered does not exist ❌");
-                    	System.out.println("Returning...");
+                        System.out.println("The code entered does not exist ❌");
+                        System.out.println("Returning...");
                     } else {
                         System.out.print("Enter the stock quantity: ");
                         productStock = Integer.parseInt(sc.nextLine());
 
-
+                        operation.addStock(productStock, productCode); //
                         System.out.println("Stock added successfully ✔️");
-                        operation.addStock(productStock, productCode);
                     }
                     break;
                 case 4:

@@ -3,7 +3,7 @@ package projetoComercio;
 import java.util.ArrayList;
 
 public class Methods {
-	ArrayList<Products> products = new ArrayList<Products>();
+	public ArrayList<Products> products = new ArrayList<Products>();
 
 	public void List() {
 		if (products.isEmpty()) {
@@ -15,17 +15,19 @@ public class Methods {
 			System.out.println((counter + ") " + product.getName() + " (code.: " + product.getCode() + " | " + "stock: " + product.getStockQuantity() +")" + "\n"));
 		}
 	}
-	public void registerProduct(String productName, int productCode, int productStock) {
-		Products newProduct = new Products(productName,productCode);
-		products.add(newProduct);
-		addStock(productStock, productCode);
-
+	public void registerProduct(String productName) {
+	    Products newProduct = new Products(productName);
+	    products.add(newProduct);
 	}
+	
 	public void addStock(int productStock, int productCode) {
-		Products product = locatePerCode(productCode);
-		product.addStockPerCode(productStock);
+	    Products product = locatePerCode(productCode);
+	    if (product != null) {
+	        product.addStockPerCode(productStock);
+	    } else {
+	        System.out.println("The code entered does not exist ❌");
+	    }
 	}
-
 
 	public Products locatePerCode(int productCode) {
 		for (Products product : products) {

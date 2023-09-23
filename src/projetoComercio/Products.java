@@ -1,17 +1,20 @@
 package projetoComercio;
 
 public class Products {
+		private static int lastCode = 0 ;
 	
-		public int code;
+		private int code;
 	
-		public String name;
+		private String name;
 		
-		public int stockQuantity;
+		private int stockQuantity;
 
-    public Products(String productName, int productCode) {
+	public Products(String productName) {
 		this.name = productName;
-		this.code = productCode;
-    }
+		lastCode++;
+		this.code = lastCode;
+		this.stockQuantity = 0;
+		}
 
     public int getCode() {
 			return code;
