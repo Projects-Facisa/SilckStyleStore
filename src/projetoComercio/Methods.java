@@ -6,14 +6,14 @@ public class Methods {
 	
 	public ArrayList<Products> products = new ArrayList<Products>();
 
-	public void List() {
+	public void ListAll() {
 		if (products.isEmpty()) {
 			System.out.println("\nNo Product Registered Yet!!\n");
 		}
 		int counter = 0;
 		for (Products product : products) {
 			counter += 1;
-			System.out.println((counter + ") " + product.getName() + " (code.: " + product.getCode() + " | " + "stock: " + product.getStockQuantity() +")" + "\n"));
+			System.out.println((counter +") "+product));
 		}
 	}
 	public void registerProduct(Products product) {

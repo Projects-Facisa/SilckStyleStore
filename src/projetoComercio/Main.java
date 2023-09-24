@@ -19,7 +19,7 @@ public class Main {
             switch (option) {
                 case 1:
                 	operation.Loading();
-                    operation.List();
+                    operation.ListAll();
                     break;
                 case 2:
                 	System.out.println("Enter the product name:");
@@ -37,11 +37,11 @@ public class Main {
                     System.out.println("Enter the product material:");
                     String productMaterial = sc.nextLine();
                     
-                    Products newProduct = new Products(productName, productStyle, productSize, productColor, productMaterial);
-                    
                     System.out.println("Enter the product Category:");
                     System.out.println("1) Chest, 2) Legs, 3) Feet");
                     int productCategory = Integer.parseInt(sc.nextLine());
+
+                    Products newProduct = new Products(productName, productStyle, productSize, productColor, productMaterial,productCategory);
                     
                     switch (productCategory) {
                     	case 1:
@@ -51,7 +51,7 @@ public class Main {
                             System.out.println("Enter the sleeve type:");
                             String productSleeve = sc.nextLine();
                             
-                    		newProduct = new Chest(productName, productStyle, productSize, productColor, productMaterial, productCleavage, productSleeve);
+                    		newProduct = new Chest(productName, productStyle, productSize, productColor, productMaterial, productCategory, productCleavage, productSleeve);
                     		break;
                     	case 2:
                     		System.out.println("Enter the waist:");
@@ -60,7 +60,7 @@ public class Main {
                             System.out.println("Enter the length:");
                             String productLength = sc.nextLine();
                                          
-                            newProduct = new Legs(productName, productStyle, productSize, productColor, productMaterial, productWaist, productLength);
+                            newProduct = new Legs(productName, productStyle, productSize, productColor, productMaterial, productCategory, productWaist, productLength);
                     		break;
                     	case 3:
                     		System.out.println("Enter the closure type:");
@@ -72,7 +72,7 @@ public class Main {
                             System.out.println("Enter the sole type:");
                             String productSoleType = sc.nextLine();
                     		
-                            newProduct = new Feet(productName, productStyle, productSize, productColor, productMaterial, productClosure, productHeelSize, productSoleType);
+                            newProduct = new Feet(productName, productStyle, productSize, productColor, productMaterial, productCategory, productClosure, productHeelSize, productSoleType);
                     		break;
                     	default:
                             System.out.println("Invalid Option, please try again ❌");

@@ -4,14 +4,11 @@ import java.util.ArrayList;
 
 
 public class Products {
-	
-		public ArrayList<Products> products = new ArrayList<Products>();
-		
 		protected static int lastCode = 0 ;
 		protected int code;
 		private String name;
 		private int stockQuantity;
-		
+		private String category;
 		private String style;
 		private String size;
 		private String color;
@@ -54,13 +51,22 @@ public class Products {
 		return material;
 	}
 	
-	 public Products(String productName, String style, String size, String color, String material) {
-        this.name = productName;
-        this.stockQuantity = 0;
-        
+	 public Products(String name, String style, String size, String color, String material,int category) {
+        this.name = name + " " + style + " " + color + " " + size;
+        stockQuantity = 0;
         this.style = style;
         this.size = size;
         this.color = color;
         this.material = material;
-    }	
+		switch (category) {
+			case 1 -> this.category = "chest";
+			case 2 -> this.category = "legs";
+			case 3 -> this.category = "feet";
+		}
+    }
+	@Override
+	public String toString() {
+		return name +
+				" (code.: " + code + " | stock: " + stockQuantity + " | category: " + category + " | buy price" + " | sell price";
+	}
 }
