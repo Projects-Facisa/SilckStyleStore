@@ -18,8 +18,8 @@ public class Feet extends Products{
 		return soleType;
 	}
 
-	public Feet(String name, String style, String size, String color, String material, int category, String closureType, String heelSize, String soleType) {
-		super(name, style, size, color, material, category);
+	public Feet(String name, String style, String size, String color, String material, int category, int stockQuantity, String closureType, String heelSize, String soleType) {
+		super(name, style, size, color, material, category, stockQuantity);
 		this.closureType = closureType;
 		this.heelSize = heelSize;
 		this.soleType = soleType;

@@ -12,8 +12,8 @@ public class Chest extends Products {
 		return sleeveType;
 	}
 	
-	public Chest(String name, String style, String size, String color, String material, int category, String cleavageType, String sleeveType) {
-		super(name, style, size, color, material, category);
+	public Chest(String name, String style, String size, String color, String material, int category, int stockQuantity, String cleavageType, String sleeveType) {
+		super(name, style, size, color, material, category, stockQuantity);
 		
 		this.cleavageType = cleavageType;
 		this.sleeveType = sleeveType;

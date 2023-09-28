@@ -5,6 +5,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Methods operation = new Methods();
+        operation.carregaArray();
+        
+        
+        
            
         int option = 0;
         System.out.println("                      [--- 🔥 WELCOME TO BYTEBLAZE STORE 🔥 ---]");
@@ -22,6 +26,7 @@ public class Main {
                     operation.ListAll();
                     break;
                 case 2:
+                    int stockQuantity= 0;
                 	System.out.println("Enter the product name:");
                     String productName = sc.nextLine();
                     
@@ -41,7 +46,7 @@ public class Main {
                     System.out.println("1) Chest, 2) Legs, 3) Feet");
                     int productCategory = Integer.parseInt(sc.nextLine());
 
-                    Products newProduct = new Products(productName, productStyle, productSize, productColor, productMaterial,productCategory);
+                    Products newProduct = new Products(productName, productStyle, productSize, productColor, productMaterial,productCategory, stockQuantity);
                     
                     switch (productCategory) {
                     	case 1:
@@ -51,7 +56,7 @@ public class Main {
                             System.out.println("Enter the sleeve type:");
                             String productSleeve = sc.nextLine();
                             
-                    		newProduct = new Chest(productName, productStyle, productSize, productColor, productMaterial, productCategory, productCleavage, productSleeve);
+                    		newProduct = new Chest(productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productCleavage, productSleeve);
                     		break;
                     	case 2:
                     		System.out.println("Enter the waist:");
@@ -60,7 +65,7 @@ public class Main {
                             System.out.println("Enter the length:");
                             String productLength = sc.nextLine();
                                          
-                            newProduct = new Legs(productName, productStyle, productSize, productColor, productMaterial, productCategory, productWaist, productLength);
+                            newProduct = new Legs(productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productWaist, productLength);
                     		break;
                     	case 3:
                     		System.out.println("Enter the closure type:");
@@ -72,7 +77,7 @@ public class Main {
                             System.out.println("Enter the sole type:");
                             String productSoleType = sc.nextLine();
                     		
-                            newProduct = new Feet(productName, productStyle, productSize, productColor, productMaterial, productCategory, productClosure, productHeelSize, productSoleType);
+                            newProduct = new Feet(productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productClosure, productHeelSize, productSoleType);
                     		break;
                     	default:
                             System.out.println("Invalid Option, please try again ❌");
@@ -105,6 +110,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.print("Enter the product code: ");
+                
                     productCode = Integer.parseInt(sc.nextLine());
 
                     if (operation.locatePerCode(productCode) == null) {
@@ -165,8 +171,10 @@ public class Main {
 	                    }
 	                    else {
                             System.out.println("Product sold successfully ✔️");
-                            operation.removeStock(productStock, productCode);
+                            operation.removeStock(productStock, productCode);                           
+                            operation.saveProductsToFile(operation.products);
 	                    }
+
                     }
                     break;
                 case 6:

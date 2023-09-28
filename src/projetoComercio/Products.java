@@ -51,13 +51,23 @@ public class Products {
 		return material;
 	}
 	
-	 public Products(String name, String style, String size, String color, String material,int category) {
-        this.name = name + " " + style + " " + color + " " + size;
-        stockQuantity = 0;
+	
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public void setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
+	}
+		
+	
+	 public Products(String name, String style, String size, String color, String material,int category, int stockQuantity) {
+        this.name = name + "," + style + "," + color + "," + size + "," + material;
         this.style = style;
         this.size = size;
         this.color = color;
         this.material = material;
+		this.stockQuantity = stockQuantity;
 		switch (category) {
 			case 1 -> this.category = "chest";
 			case 2 -> this.category = "legs";
