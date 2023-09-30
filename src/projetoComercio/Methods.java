@@ -121,7 +121,7 @@ public class Methods {
 				while (scan.hasNextLine()) {
 					String[] productsArray = scan.nextLine().split(",");
                     Products product = new Products(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]));
-                    switch (productsArray[5]) {
+                    switch (productsArray[6]) {
                         case "Chest":
                             product = new Chest(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]), productsArray[8], productsArray[9]);
                             tempArray.add(product);
@@ -134,8 +134,7 @@ public class Methods {
                             product = new Feet(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]), productsArray[8], productsArray[9], productsArray[10]);
                             tempArray.add(product);
                             break;
-                    }
-                    tempArray.add(product);
+                    }                  
 				}
 				scan.close();
 			}

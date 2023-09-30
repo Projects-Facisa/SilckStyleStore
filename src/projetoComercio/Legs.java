@@ -11,12 +11,11 @@ public class Legs extends Products {
 	public String getLength() {
 		return length;
 	}
-	public Legs(){}
+
 	public Legs(int code, String name, String style, String size, String color, String material, String category, int stockQuantity, String waist, String length) {
 		super(code, name, style, size, color, material, category, stockQuantity);
 		this.waist = waist;
 		this.length = length;
-		this.code = ++lastCode;
 	}
 	@Override
 	public String toString() {

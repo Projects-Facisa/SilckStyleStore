@@ -11,12 +11,10 @@ public class Chest extends Products {
 	public String getSleeveType() {
 		return sleeveType;
 	}
-	public Chest(){}
 	public Chest(int code, String name, String style, String size, String color, String material, String category, int stockQuantity, String cleavageType, String sleeveType) {
 		super(code, name, style, size, color, material, category, stockQuantity);
 		this.cleavageType = cleavageType;
 		this.sleeveType = sleeveType;
-		this.code = ++lastCode;
 	}
 	@Override
 	public String toString() {

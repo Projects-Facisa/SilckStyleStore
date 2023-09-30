@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 
 public class Products {
-		protected static int lastCode = 0 ;
 		protected int code;
 		protected String name;
 		protected int stockQuantity;
@@ -55,7 +54,6 @@ public class Products {
 		return material;
 	}
 	
-	
 	public void setCode(int code) {
 		this.code = code;
 	}
@@ -64,8 +62,8 @@ public class Products {
 		this.stockQuantity = stockQuantity;
 	}
 
-	public Products(){}
 	public Products(int code, String name, String style, String size, String color, String material,String category, int stockQuantity) {
+		this.code = code;
 		this.name = name + "," + style + "," + color + "," + size + "," + material + "," + category;
         this.style = style;
         this.size = size;
