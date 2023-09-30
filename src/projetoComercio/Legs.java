@@ -11,11 +11,20 @@ public class Legs extends Products {
 	public String getLength() {
 		return length;
 	}
-	
-	public Legs(String name, String style, String size, String color, String material, int category, int stockQuantity, String waist, String length) {
-		super(name, style, size, color, material, category, stockQuantity);
+	public Legs(){}
+	public Legs(int code, String name, String style, String size, String color, String material, String category, int stockQuantity, String waist, String length) {
+		super(code, name, style, size, color, material, category, stockQuantity);
 		this.waist = waist;
 		this.length = length;
-		code = ++lastCode;
+		this.code = ++lastCode;
+	}
+	@Override
+	public String toString() {
+		return name +
+				" (code.: " + code + " | stock: " + stockQuantity + " | category attributes: " + " | waist: " + waist + " | lenght: " + length + " | buy price" + " | sell price";
+	}
+	@Override
+	public String saveFileString() {
+		return code+","+name+","+stockQuantity+","+waist+","+length;
 	}
 }

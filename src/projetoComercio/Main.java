@@ -6,27 +6,41 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Methods operation = new Methods();
         operation.carregaArray();
-        
-        
-        
            
         int option = 0;
         System.out.println("                      [--- 🔥 WELCOME TO BYTEBLAZE STORE 🔥 ---]");
         operation.Loading();
         while (option != 6) {
             System.out.println("                                 [--- MAIN MENU ---]\n");
-            System.out.println("(1) List All (2) Register Product (3) Add Stock (4) Remove Product (5) Sell Product (6) Exit");
+            System.out.println("(1) List Options (2) Register Product (3) Add Stock (4) Remove Product (5) Sell Product (6) Exit");
             option = Integer.parseInt(sc.nextLine());
             int productStock;
             int productCode;
 
             switch (option) {
                 case 1:
-                	operation.Loading();
-                    operation.ListAll();
+                    System.out.println("(1) List All (2) List per category");
+                    option = Integer.parseInt(sc.nextLine());
+                    if (option == 1) {
+                        operation.Loading();
+                        operation.ListAll();
+                    } else if (option == 2) {
+                        System.out.println("(1) Chest (2) Legs (3) Feet");
+                        String categoryOption = sc.nextLine();
+                        operation.Loading();
+                        switch (categoryOption){
+                            case "1" -> operation.ListChest();
+                            case "2" -> operation.ListLegs();
+                            case "3" -> operation.ListFeet();
+                        }
+
+                    }
                     break;
+
                 case 2:
                     int stockQuantity= 0;
+                    int code = 0;
+
                 	System.out.println("Enter the product name:");
                     String productName = sc.nextLine();
                     
@@ -44,30 +58,34 @@ public class Main {
                     
                     System.out.println("Enter the product Category:");
                     System.out.println("1) Chest, 2) Legs, 3) Feet");
-                    int productCategory = Integer.parseInt(sc.nextLine());
 
-                    Products newProduct = new Products(productName, productStyle, productSize, productColor, productMaterial,productCategory, stockQuantity);
+                    String productCategory = sc.nextLine();
+
+                    Products newProduct = new Products(code, productName, productStyle, productSize, productColor, productMaterial,productCategory, stockQuantity);
                     
                     switch (productCategory) {
-                    	case 1:
+                    	case "1":
+                            productCategory = "Chest";
                     		System.out.println("Enter the cleavage type:");
                             String productCleavage = sc.nextLine();
                             
                             System.out.println("Enter the sleeve type:");
                             String productSleeve = sc.nextLine();
-                            
-                    		newProduct = new Chest(productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productCleavage, productSleeve);
+
+                    		newProduct = new Chest(code, productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productCleavage, productSleeve);
                     		break;
-                    	case 2:
+                    	case "2":
+                            productCategory = "Legs";
                     		System.out.println("Enter the waist:");
                             String productWaist = sc.nextLine();
                             
                             System.out.println("Enter the length:");
                             String productLength = sc.nextLine();
                                          
-                            newProduct = new Legs(productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productWaist, productLength);
+                            newProduct = new Legs(code, productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productWaist, productLength);
                     		break;
-                    	case 3:
+                    	case "3":
+                            productCategory = "Feet";
                     		System.out.println("Enter the closure type:");
                             String productClosure = sc.nextLine();
                             
@@ -77,7 +95,7 @@ public class Main {
                             System.out.println("Enter the sole type:");
                             String productSoleType = sc.nextLine();
                     		
-                            newProduct = new Feet(productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productClosure, productHeelSize, productSoleType);
+                            newProduct = new Feet(code, productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productClosure, productHeelSize, productSoleType);
                     		break;
                     	default:
                             System.out.println("Invalid Option, please try again ❌");
@@ -179,6 +197,7 @@ public class Main {
                     break;
                 case 6:
                     System.out.println("Exiting ByteBlazeStore, Thank You!");
+                    operation.saveProductsToFile(operation.getProducts());
                     break;
                 default:
                     System.out.println("Invalid Option, please try again ❌");

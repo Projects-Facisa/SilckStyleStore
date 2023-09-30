@@ -18,11 +18,20 @@ public class Feet extends Products{
 		return soleType;
 	}
 
-	public Feet(String name, String style, String size, String color, String material, int category, int stockQuantity, String closureType, String heelSize, String soleType) {
-		super(name, style, size, color, material, category, stockQuantity);
+	public Feet(){}
+	public Feet(int code, String name, String style, String size, String color, String material, String category, int stockQuantity, String closureType, String heelSize, String soleType) {
+		super(code, name, style, size, color, material, category, stockQuantity);
 		this.closureType = closureType;
 		this.heelSize = heelSize;
 		this.soleType = soleType;
-		code = ++lastCode;
+		this.code = ++lastCode;
+	}
+	@Override
+	public String toString() {
+		return super.toString() + closureType + heelSize + soleType;
+	}
+	@Override
+	public String saveFileString() {
+		return code+","+name+","+stockQuantity+","+closureType+","+heelSize+","+soleType;
 	}
 }

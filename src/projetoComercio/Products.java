@@ -6,15 +6,15 @@ import java.util.ArrayList;
 public class Products {
 		protected static int lastCode = 0 ;
 		protected int code;
-		private String name;
-		private int stockQuantity;
-		private String category;
+		protected String name;
+		protected int stockQuantity;
+		protected String category;
 		private String style;
 		private String size;
 		private String color;
 		private String material;
-		
-		//private int costOfSale; Ambos os atributos ainda serão trabalhados. 
+
+		//private int costOfSale; Ambos os atributos ainda serão trabalhados.
 		//private int costOfPurchase;
 		
     public int getCode() {
@@ -27,6 +27,10 @@ public class Products {
 
 	public int getStockQuantity() {
 		return stockQuantity;
+	}
+
+	public String getCategory() {
+		return category;
 	}
 
 	public void addStockPerCode(int stockQuantity) {
@@ -59,23 +63,22 @@ public class Products {
 	public void setStockQuantity(int stockQuantity) {
 		this.stockQuantity = stockQuantity;
 	}
-		
-	
-	 public Products(String name, String style, String size, String color, String material,int category, int stockQuantity) {
-        this.name = name + "," + style + "," + color + "," + size + "," + material;
+
+	public Products(){}
+	public Products(int code, String name, String style, String size, String color, String material,String category, int stockQuantity) {
+		this.name = name + "," + style + "," + color + "," + size + "," + material + "," + category;
         this.style = style;
         this.size = size;
         this.color = color;
         this.material = material;
 		this.stockQuantity = stockQuantity;
-		switch (category) {
-			case 1 -> this.category = "chest";
-			case 2 -> this.category = "legs";
-			case 3 -> this.category = "feet";
+		this.category = category;
+
 		}
-    }
-	@Override
-	public String toString() {
+	public String saveFileString() {
+		return code+","+name+","+stockQuantity;
+	}
+	public String toString(){
 		return name +
 				" (code.: " + code + " | stock: " + stockQuantity + " | category: " + category + " | buy price" + " | sell price";
 	}
