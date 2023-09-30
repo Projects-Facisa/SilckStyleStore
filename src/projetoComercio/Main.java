@@ -5,13 +5,13 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Methods operation = new Methods();
-        operation.carregaArray();
-           
+        operation.LoadProductArrayFile();
+
         int option = 0;
         System.out.println("                      [--- 🔥 WELCOME TO BYTEBLAZE STORE 🔥 ---]");
         operation.Loading();
         while (option != 6) {
-            System.out.println("                                 [--- MAIN MENU ---]\n");
+            System.out.println("\n                                 [--- MAIN MENU ---]\n");
             System.out.println("(1) List Options (2) Register Product (3) Add Stock (4) Remove Product (5) Sell Product (6) Exit");
             option = Integer.parseInt(sc.nextLine());
             int productStock;
@@ -21,16 +21,14 @@ public class Main {
                     System.out.println("(1) List All (2) List per category");
                     option = Integer.parseInt(sc.nextLine());
                     if (option == 1) {
-                        operation.Loading();
                         operation.ListAll();
                     } else if (option == 2) {
                         System.out.println("(1) Chest (2) Legs (3) Feet");
-                        String categoryOption = sc.nextLine();
-                        operation.Loading();
+                        int categoryOption = Integer.parseInt(sc.nextLine());
                         switch (categoryOption){
-                            case "1" -> operation.ListChest();
-                            case "2" -> operation.ListLegs();
-                            case "3" -> operation.ListFeet();
+                            case 1 -> operation.ListPerCategory("Chest");
+                            case 2 -> operation.ListPerCategory("Legs");
+                            case 3 -> operation.ListPerCategory("Feet");
                         }
                     }
                     break;
@@ -57,53 +55,50 @@ public class Main {
 		                
 		                System.out.println("Enter the product material:");
 		                String productMaterial = sc.nextLine();
+
+                        System.out.println("Enter the product cost:");
+                        double productCost = Integer.parseInt(sc.nextLine());
+
+                        System.out.println("Enter the sale value:");
+                        double saleValue = Integer.parseInt(sc.nextLine());
 		                
 		                System.out.println("Enter the product Category:");
 		                System.out.println("1) Chest, 2) Legs, 3) Feet");
 		
 		                String productCategory = sc.nextLine();
 		                                 
-		                Products newProduct = new Products(productCode, productName, productStyle, productSize, productColor, productMaterial,productCategory, stockQuantity);
-		                
-		              	
-		                    switch (productCategory) {
-		                    	case "1":
-		                            productCategory = "Chest";
-		                    		System.out.println("Enter the cleavage type:");
-		                            String productCleavage = sc.nextLine();
-		                            
-		                            System.out.println("Enter the sleeve type:");
-		                            String productSleeve = sc.nextLine();
-		
-		                    		newProduct = new Chest(productCode, productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productCleavage, productSleeve);
-		                    		break;
-		                    	case "2":
-		                            productCategory = "Legs";
-		                    		System.out.println("Enter the waist:");
-		                            String productWaist = sc.nextLine();
-		                            
-		                            System.out.println("Enter the length:");
-		                            String productLength = sc.nextLine();
-		                                         
-		                            newProduct = new Legs(productCode, productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productWaist, productLength);
-		                    		break;
-		                    	case "3":
-		                            productCategory = "Feet";
-		                    		System.out.println("Enter the closure type:");
-		                            String productClosure = sc.nextLine();
-		                            
-		                            System.out.println("Enter the heel size:");
-		                            String productHeelSize = sc.nextLine();
-		                            
-		                            System.out.println("Enter the sole type:");
-		                            String productSoleType = sc.nextLine();
-		                    		
-		                            newProduct = new Feet(productCode, productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productClosure, productHeelSize, productSoleType);
-		                    		break;
-		                    	default:
-		                            System.out.println("Invalid Option, please try again ❌");
-		                            break;
-		                    }		                		                    
+		                Products newProduct = new Products(productCode, productName, productStyle, productSize, productColor, productMaterial,productCategory, stockQuantity, productCost, saleValue);
+
+
+                        switch (productCategory) {
+                            case "1" -> {
+                                productCategory = "Chest";
+                                System.out.println("Enter the cleavage type:");
+                                String productCleavage = sc.nextLine();
+                                System.out.println("Enter the sleeve type:");
+                                String productSleeve = sc.nextLine();
+                                newProduct = new Chest(productCode, productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productCost, saleValue, productCleavage, productSleeve);
+                            }
+                            case "2" -> {
+                                productCategory = "Legs";
+                                System.out.println("Enter the waist:");
+                                String productWaist = sc.nextLine();
+                                System.out.println("Enter the length:");
+                                String productLength = sc.nextLine();
+                                newProduct = new Legs(productCode, productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productCost, saleValue, productWaist, productLength);
+                            }
+                            case "3" -> {
+                                productCategory = "Feet";
+                                System.out.println("Enter the closure type:");
+                                String productClosure = sc.nextLine();
+                                System.out.println("Enter the heel size:");
+                                String productHeelSize = sc.nextLine();
+                                System.out.println("Enter the sole type:");
+                                String productSoleType = sc.nextLine();
+                                newProduct = new Feet(productCode, productName, productStyle, productSize, productColor, productMaterial, productCategory, stockQuantity, productCost, saleValue, productClosure, productHeelSize, productSoleType);
+                            }
+                            default -> System.out.println("Invalid Option, please try again ❌");
+                        }
 		                    operation.registerProduct(newProduct);
 		                    
 		                    System.out.println("Do you want to add stock?\n(1) Yes (2) No");
@@ -116,16 +111,22 @@ public class Main {
 		                            System.out.println("It was not possible to add the product because the stock entered is negative ❌");
 		                        } 
 		                        else {
-		                            operation.addStock(productStock, productCode);
-		                            System.out.print(newProduct.getName() + " added successfully.");
-		                            System.out.println(" code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
+                                    if (operation.floatingCapital >= (newProduct.getProductCost() * productStock)){
+                                        operation.buyWithFloatingCapital((newProduct.getProductCost() * productStock));
+                                        operation.addStock(productStock, productCode);
+                                        System.out.print(newProduct.getName() + " added successfully.");
+                                        System.out.println(" code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
+                                    }
+                                    else {
+                                        System.out.println("Not enough capital to add stock ❌");
+                                    }
 		                        }
 		                    } 
 		                    else {
 		                        System.out.print(newProduct.getName() + " added successfully.");
 		                        System.out.println(" code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
 		                    }
-		                    operation.saveProductsToFile(operation.getProducts());
+		                    operation.SaveProductsToFile(operation.getProducts());
                     }else{
                         System.out.println("Product code already in use");
                     }                    
@@ -141,10 +142,20 @@ public class Main {
                     } else {
                         System.out.print("Enter the stock quantity: ");
                         productStock = Integer.parseInt(sc.nextLine());
-
-                        operation.addStock(productStock, productCode); //
-                        System.out.println("Stock added successfully ✔️");
-                        operation.saveProductsToFile(operation.getProducts());
+                        if (productStock < 0) {
+                            System.out.println("It was not possible to add the product because the stock entered is negative ❌");
+                        }
+                        else {
+                            if (operation.floatingCapital >= (operation.locatePerCode(productCode).getProductCost() * productStock)){
+                                operation.buyWithFloatingCapital(operation.locatePerCode(productCode).getProductCost() * productStock);
+                                operation.addStock(productStock, productCode); //
+                                System.out.println("Stock added successfully ✔️");
+                                operation.SaveProductsToFile(operation.getProducts());
+                            }
+                            else {
+                                System.out.println("Not enough capital to add stock ❌");
+                            }
+                        }
                     }
                     break;
                 case 4:
@@ -159,7 +170,7 @@ public class Main {
 	                    if (operation.locatePerCode(productCode).getStockQuantity() == 0) {
                             System.out.println("Product removed successfully ✔️");
                             operation.deleteProduct(productCode);
-                            operation.saveProductsToFile(operation.getProducts());
+                            operation.SaveProductsToFile(operation.getProducts());
 	                    }
 	                    else {
 	                        System.out.println("There's still stock of this product in the market");
@@ -169,7 +180,7 @@ public class Main {
 	                        if (optionRemove == 1) {
                                 System.out.println("Product removed successfully ✔️");
                                 operation.deleteProduct(productCode);
-                                operation.saveProductsToFile(operation.getProducts());
+                                operation.SaveProductsToFile(operation.getProducts());
 	                        }
 	                        else {
 	                        	System.out.println("Operation Cancelled ❌");
@@ -196,8 +207,9 @@ public class Main {
 	                    }
 	                    else {
                             System.out.println("Product sold successfully ✔️");
+                            operation.sellWithFloatingCapital(operation.locatePerCode(productCode).getSaleValue() * productStock);
                             operation.removeStock(productStock, productCode);                           
-                            operation.saveProductsToFile(operation.getProducts());
+                            operation.SaveProductsToFile(operation.getProducts());
 	                    }
                     }
                     break;

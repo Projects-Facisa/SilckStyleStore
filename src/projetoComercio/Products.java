@@ -4,80 +4,64 @@ import java.util.ArrayList;
 
 
 public class Products {
-		protected int code;
-		protected String name;
-		protected int stockQuantity;
-		protected String category;
-		private String style;
-		private String size;
-		private String color;
-		private String material;
+        protected int code;
+        protected String name;
+        protected int stockQuantity;
+        protected String category;
+        private String style;
+        private String size;
+        private String color;
+        private String material;
+        protected double productCost;
+        protected double saleValue;
 
-		//private int costOfSale; Ambos os atributos ainda serão trabalhados.
-		//private int costOfPurchase;
-		
     public int getCode() {
-			return code;
-	}
+            return code;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getStockQuantity() {
-		return stockQuantity;
-	}
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
 
-	public String getCategory() {
-		return category;
-	}
+    public String getCategory() {
+        return category;
+    }
 
-	public void addStockPerCode(int stockQuantity) {
-		this.stockQuantity += stockQuantity;	
-	}
-	public void removeStockPerCode(int stockQuantity) {
-		this.stockQuantity -= stockQuantity;
-	}		
-	public String getStyle() {
-		return style;
-	}
-	
-	public String getSize() {
-		return size;
-	}
+    public void addStockPerCode(int stockQuantity) {
+        this.stockQuantity += stockQuantity;
+    }
+    public void removeStockPerCode(int stockQuantity) {
+        this.stockQuantity -= stockQuantity;
+    }
+    public double getProductCost() {
+        return productCost;
+    }
+    public double getSaleValue() {
+        return saleValue;
+    }
 
-	public String getColor() {
-		return color;
-	}
-
-	public String getMaterial() {
-		return material;
-	}
-	
-	public void setCode(int code) {
-		this.code = code;
-	}
-
-	public void setStockQuantity(int stockQuantity) {
-		this.stockQuantity = stockQuantity;
-	}
-
-	public Products(int code, String name, String style, String size, String color, String material,String category, int stockQuantity) {
-		this.code = code;
-		this.name = name + "," + style + "," + color + "," + size + "," + material + "," + category;
+    public Products(int code, String name, String style, String size, String color, String material, String category, int stockQuantity, double productCost, double saleValue) {
+        this.code = code;
+        this.name = name + "," + style + "," + color + "," + size + "," + material;
         this.style = style;
         this.size = size;
         this.color = color;
         this.material = material;
-		this.stockQuantity = stockQuantity;
-		this.category = category;
+        this.category = category;
+        this.stockQuantity = stockQuantity;
+        this.productCost = productCost;
+        this.saleValue = saleValue;
 
-		}
-	public String saveFileString() {
-		return code+","+name+","+stockQuantity;
-	}
-	public String toString(){
-		return name +
-				" (code.: " + code + " | stock: " + stockQuantity + " | category: " + category + " | buy price" + " | sell price";
-	}
+        }
+    public String saveFileString() {
+        return code+","+name+","+category+","+stockQuantity+","+productCost+","+saleValue;
+    }
+    public String toStringProduct(){
+        return name +
+                " (code.: " + code + " | stock: " + stockQuantity + " | category: " + category + " | product cost: " + productCost + " | sale value:" + saleValue;
+    }
 }

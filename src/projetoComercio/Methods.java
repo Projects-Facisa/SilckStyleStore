@@ -7,6 +7,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Methods {
+
+    public double floatingCapital = 50000;
+
+    public void buyWithFloatingCapital(double buyValue) {
+        floatingCapital -= buyValue;
+    }
+    public void sellWithFloatingCapital(double sellValue) {
+        floatingCapital += sellValue;
+    }
+
+
     public ArrayList<Products> products = new ArrayList<Products>();
 
     public ArrayList<Products> getProducts() {
@@ -15,56 +26,41 @@ public class Methods {
 
     public void ListAll() {
         if (products.isEmpty()) {
-            System.out.println("\nNo Product Registered Yet!!\n");
-        }
-
-        for (Products product : products) {
-            System.out.println(product);
-        }
-    }
-    public void ListChest() {
-        if (products.isEmpty()) {
-            System.out.println("\nNo Product Registered Yet!!\n");
-        }
-        for (Products product : products) {
-            if (product.getCategory().equals("Chest")){
-                System.out.println(product);  //Ainda não está usando o toString da Subclasse
+            System.out.println("\nNo product registered yet!!");
+        } else {
+            Loading();
+            System.out.println(floatingCapital);
+            for (Products product : products) {
+                System.out.println(product.toStringProduct());
             }
         }
     }
-    public void ListLegs() {
-        if (products.isEmpty()) {
-            System.out.println("\nNo Product Registered Yet!!\n");
-        }
-
+    public void ListPerCategory(String category) {
+        boolean productInCategory = false;
         for (Products product : products) {
-            if (product.getCategory().equals("Legs")){
-                System.out.println(product);  //Ainda não está usando o toString da Subclasse
+            if (product.getCategory().equals(category)) {
+                productInCategory = true;
+                break;
+            }
+        }
+        if (!productInCategory) {
+            System.out.println("\nNo product registered in this category yet!!");
+        } else {
+            Loading();
+            for (Products product : products) {
+                if (product.getCategory().equals(category)) {
+                    System.out.println(product);
+                }
             }
         }
     }
-    public void ListFeet() {
-        if (products.isEmpty()) {
-            System.out.println("\nNo Product Registered Yet!!\n");
-        }
-        for (Products product : products) {
-            if (product.getCategory().equals("Feet")){
-                System.out.println(product);  //Ainda não está usando o toString da Subclasse
-            }
-        }
-    }
-
     public void registerProduct(Products product) {
         products.add(product);
     }
 
     public void addStock(int productStock, int productCode) {
         Products product = locatePerCode(productCode);
-        if (product != null) {
-            product.addStockPerCode(productStock);
-        } else {
-            System.out.println("The code entered does not exist ❌");
-        }
+        product.addStockPerCode(productStock);
     }
 
     public Products locatePerCode(int productCode) {
@@ -101,45 +97,43 @@ public class Methods {
         }
     }
 
-    public void saveProductsToFile(ArrayList<Products> products) {
-        try (PrintWriter writer = new PrintWriter("arquivo.txt")) {
+    public void SaveProductsToFile(ArrayList<Products> products) {
+        try (PrintWriter writer = new PrintWriter("fileArray.txt")) {
             for (Products product : products) {
             	writer.write(product.saveFileString()+"\n");
             }
 			writer.close();
-            System.out.println("Products saved to " + "arquivo.txt");
+            System.out.println("Products saved to " + "fileArray.txt");
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + "arquivo.txt");
+            System.out.println("File not found: " + "fileArray.txt");
         }
     }
 
-    public void carregaArray() { //Talvez o
+    public void LoadProductArrayFile() { //Talvez o
 		ArrayList<Products> tempArray = new ArrayList<Products>();
-		File file = new File("arquivo.txt");
+		File file = new File("fileArray.txt");
 			try {
 				Scanner scan = new Scanner(file);
 				while (scan.hasNextLine()) {
 					String[] productsArray = scan.nextLine().split(",");
-                    Products product = new Products(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]));
+                    Products product = new Products(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]), Double.parseDouble(productsArray[8]), Double.parseDouble(productsArray[9]));
                     switch (productsArray[6]) {
                         case "Chest":
-                            product = new Chest(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]), productsArray[8], productsArray[9]);
-                            tempArray.add(product);
+                            product = new Chest(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]), Double.parseDouble(productsArray[8]), Double.parseDouble(productsArray[9]), productsArray[10], productsArray[11]);
                             break;
                         case "Legs":
-                            product = new Legs(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]), productsArray[8], productsArray[9]);
-                            tempArray.add(product);
+                            product = new Legs(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]), Double.parseDouble(productsArray[8]), Double.parseDouble(productsArray[9]), productsArray[10], productsArray[11]);
                             break;
                         case "Feet":
-                            product = new Feet(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]), productsArray[8], productsArray[9], productsArray[10]);
-                            tempArray.add(product);
+                            product = new Feet(Integer.parseInt(productsArray[0]),productsArray[1], productsArray[2], productsArray[3], productsArray[4], productsArray[5], productsArray[6], Integer.parseInt(productsArray[7]), Double.parseDouble(productsArray[8]), Double.parseDouble(productsArray[9]), productsArray[10], productsArray[11], productsArray[12]);
                             break;
-                    }                  
+                    }
+                    tempArray.add(product);
 				}
 				scan.close();
 			}
             catch (FileNotFoundException e) {
-            	System.out.println("File not found: " + "arquivo.txt");	
+            	System.out.println("File not found: " + "fileArray.txt");
 			}
 		products = tempArray;
 	}}
