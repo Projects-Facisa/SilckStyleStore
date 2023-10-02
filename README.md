@@ -1,4 +1,4 @@
-## SilcyStyleStore - Java Commerce Project 💼🛍️
+## SilckStyleStore - Java Commerce Project 💼🛍️
 
 Project developed under the guidance of Professor Armando Agra for the module 2 - Basic Object-Oriented Programming in Java. SilckStyleStore is a commerce system that offers the following functionalities:
 
