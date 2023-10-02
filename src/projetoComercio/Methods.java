@@ -96,6 +96,15 @@ public class Methods {
             System.err.println("Error during loading" + e.getMessage());
         }
     }
+    
+    public int calculateTotalStock() {
+        int totalStock = 0;
+        for (Products product : products) {
+            totalStock += product.getStockQuantity();
+        }
+        return totalStock;
+    }
+    
 
     public void SaveProductsToFile(ArrayList<Products> products) {
         try (PrintWriter writer = new PrintWriter("fileArray.txt")) {
