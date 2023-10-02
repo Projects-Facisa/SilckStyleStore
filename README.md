@@ -1,6 +1,6 @@
-## ByteBlazeStore - Java Commerce Project 💼🛍️
+## SilcyStyleStore - Java Commerce Project 💼🛍️
 
-Project developed under the guidance of Professor Armando Agra for the module 2 - Basic Object-Oriented Programming in Java. ByteBlazeStore is a commerce system that offers the following functionalities:
+Project developed under the guidance of Professor Armando Agra for the module 2 - Basic Object-Oriented Programming in Java. SilckStyleStore is a commerce system that offers the following functionalities:
 
 # Features 🚀
 
@@ -14,7 +14,9 @@ Project developed under the guidance of Professor Armando Agra for the module 2 
 
 5 - Sell an existing product 💲
 
-6 - Exit the program 🚪
+6 - Session Report 🧾
+
+7 - Exit the program 🚪
 
 # How to use 📋
 
