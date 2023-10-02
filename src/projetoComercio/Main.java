@@ -17,7 +17,7 @@ public class Main {
         double moneyEarnedSession = 0;
         int stockAfterSales = 0;
 
-        System.out.println("                      [--- 🔥 WELCOME TO BYTEBLAZE STORE 🔥 ---]");
+        System.out.println("                      [--- 🔥 WELCOME TO SILCK STYLE STORE 🔥 ---]");
         operation.Loading();
 
         while (option != 6) {
@@ -232,7 +232,7 @@ public class Main {
                     }
                     break;
                 case 6:
-                    System.out.println("Exiting ByteBlazeStore, Thank You!");
+                    System.out.println("Exiting Silck Style Store, Thank You!");
                     operation.saveFloatingCapitalToFile();
                     break;
                 case 7:
