@@ -7,6 +7,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Methods operation = new Methods();
         operation.LoadProductArrayFile();
+        operation.loadFloatingCapitalFromFile();
 
         int option = 0;
         int productsAddedSession = 0;
@@ -232,6 +233,7 @@ public class Main {
                     break;
                 case 6:
                     System.out.println("Exiting ByteBlazeStore, Thank You!");
+                    operation.saveFloatingCapitalToFile();
                     break;
                 case 7:
                     SessionReport sessionReport = new SessionReport(productsAddedSession, productsRemovedSession, productsSoldSession, currentStockSession, moneyEarnedSession, stockAfterSales);

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Methods {
 
-    public double floatingCapital = 50000;
+    public double floatingCapital = 0;
 
     public void buyWithFloatingCapital(double buyValue) {
         floatingCapital -= buyValue;
@@ -16,7 +16,6 @@ public class Methods {
     public void sellWithFloatingCapital(double sellValue) {
         floatingCapital += sellValue;
     }
-
 
     public ArrayList<Products> products = new ArrayList<Products>();
 
@@ -29,7 +28,7 @@ public class Methods {
             System.out.println("\nNo product registered yet!!");
         } else {
             Loading();
-            System.out.println(floatingCapital);
+            System.out.println("Floating Capital:" + floatingCapital);
             for (Products product : products) {
                 System.out.println(product.toStringProduct());
             }
@@ -145,4 +144,24 @@ public class Methods {
             	System.out.println("File not found: " + "fileArray.txt");
 			}
 		products = tempArray;
-	}}
+	}
+    public void saveFloatingCapitalToFile() {
+        try (PrintWriter writer = new PrintWriter("FileCashRegister.txt")) {
+            writer.write(String.valueOf(floatingCapital));
+        } catch (FileNotFoundException e) {
+            System.out.println("Error saving Floating Capital: " + e.getMessage());
+        }
+    }
+    public void loadFloatingCapitalFromFile() {
+        try (Scanner scanner = new Scanner(new File("FileCashRegister.txt"))) {
+            if (scanner.hasNextLine()) {
+                String fileCapital = scanner.nextLine();
+                floatingCapital = Double.parseDouble(fileCapital);
+            } else {
+                System.out.println("FileCashRegister.txt is empty or formatted incorrectly.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("FileCashRegister.txt not found. Floating Capital not loaded.");
+        }
+    }
+}
