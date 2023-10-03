@@ -28,18 +28,21 @@ public class Methods {
     }
 
     public void ListAll() {
+    	int counter = 0;
         if (products.isEmpty()) {
             System.out.println("\nNo product registered yet!!");
         } else {
             Loading();
-            System.out.println("Floating Capital:" + floatingCapital);
+            System.out.println();
             for (Products product : products) {
-                System.out.println(product.toStringProduct());
+            	counter +=1;
+                System.out.println(counter + ") "+ product.toStringProduct());
             }
         }
     }
     public void ListPerCategory(String category) {
         boolean productInCategory = false;
+        int counter = 0;
         for (Products product : products) {
             if (product.getCategory().equals(category)) {
                 productInCategory = true;
@@ -50,9 +53,11 @@ public class Methods {
             System.out.println("\nNo product registered in this category yet!!");
         } else {
             Loading();
+            System.out.println();
             for (Products product : products) {
+            	counter +=1;
                 if (product.getCategory().equals(category)) {
-                    System.out.println(product);
+                    System.out.println(counter + ") " + product);
                 }
             }
         }
@@ -115,13 +120,12 @@ public class Methods {
             	writer.write(product.saveFileString()+"\n");
             }
 			writer.close();
-            System.out.println("Products saved to " + "fileArray.txt");
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + "fileArray.txt");
         }
     }
 
-    public void LoadProductArrayFile() { //Talvez o
+    public void LoadProductArrayFile() {
 		ArrayList<Products> tempArray = new ArrayList<Products>();
 		File file = new File("fileArray.txt");
 			try {
@@ -152,7 +156,9 @@ public class Methods {
     public void saveFloatingCapitalToFile() {
         try (PrintWriter writer = new PrintWriter("FileCashRegister.txt")) {
             writer.write(String.valueOf(floatingCapital));
-        } catch (FileNotFoundException e) {
+            writer.close();
+        } 
+        catch (FileNotFoundException e) {
             System.out.println("Error saving Floating Capital: " + e.getMessage());
         }
     }

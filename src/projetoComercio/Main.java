@@ -12,15 +12,15 @@ public class Main {
 
 
         int option = 0;
-        double totalProfit = 0.0;
         double moneyEarned = 0.0;
         double moneySpent = 0.0;
+        double totalProfit = 0.0;
 
-        System.out.println("                      [--- 🔥 WELCOME TO SILCK STYLE STORE 🔥 ---]");
+        System.out.println("                                   [--- 🕸️ WELCOME TO SILCK STYLE STORE 🕸️ ---]\n");
         operation.Loading();
 
         while (option != 7) {
-            System.out.println("\n                                 [--- MAIN MENU ---]\n");
+            System.out.println("\n                              [--- MAIN MENU ---] [--- FLOATING CAPITAL: " + operation.getFloatingCapital() + " ---]\n");
             System.out.println("(1) List Options (2) Register Product (3) Add Stock (4) Remove Product (5) Sell Product (6) Session Report (7) Exit");
             option = Integer.parseInt(sc.nextLine());
             int productStock;
@@ -222,26 +222,28 @@ public class Main {
                             operation.removeStock(productStock, productCode);                           
                             save.productsRemoved(operation.locatePerCode(productCode).getName(), productStock,operation.locatePerCode(productCode).getSaleValue());
                             operation.SaveProductsToFile(operation.getProducts());
-                            
+                            System.out.println("Stock sold successfully ✔️");
                         }
                     }
                     break;
-                    case 6:
+                case 6:
                     operation.Loading();
-                    System.out.println("\nStock Purchased and Profit:\n");
+                    System.out.println("\nStock Purchased:\n");
                     for (String added : save.getProductsAddedSession()) {
-                         String[] parts = added.split(" ");
-                        moneySpent = Double.parseDouble(parts[parts.length - 1]);
-                        System.out.println(added);
+                    	moneySpent = 0.0 ;
+                    	System.out.println(added);
+                        String[] parts = added.split(" ");
+                        moneySpent += Double.parseDouble(parts[parts.length - 1]);
                     }
                     
-                    System.out.println("\nStock Sold and Profit:\n");
+                    System.out.println("\nStock Sold:\n");
                     for (String removed : save.getProductsRemovedSession()) {
+                    	moneyEarned = 0.0 ;
                         System.out.println(removed);
                         String[] parts = removed.split(" ");
-                        moneyEarned = Double.parseDouble(parts[parts.length - 1]);
+                        moneyEarned +=  Double.parseDouble(parts[parts.length - 1]);
                     }
-                    double profit = moneyEarned - moneySpent;
+                    double profit = moneyEarned - moneySpent; 
                     totalProfit += profit;
                     System.out.println("\nTotal Profit: " + totalProfit);
                     break;                

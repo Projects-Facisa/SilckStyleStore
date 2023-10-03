@@ -1,8 +1,5 @@
 package projetoComercio;
 
-import java.util.ArrayList;
-
-
 public class Products {
         protected int code;
         protected String name;
