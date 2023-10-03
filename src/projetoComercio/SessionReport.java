@@ -1,30 +1,31 @@
 package projetoComercio;
 
+import java.util.ArrayList;
+
 public class SessionReport {
-    private int productsAddedSession;
-    private int productsRemovedSession;
-    private int productsSoldSession;
-    private int currentStockSession;
-    private double moneyEarnedSession;
 
-    private int stockNow;  
-    public SessionReport(int productsAddedSession, int productsRemovedSession, int productsSoldSession, int currentStockSession, double moneyEarnedSession, int stockNow) {
-        this.productsAddedSession = productsAddedSession;
-        this.productsRemovedSession = productsRemovedSession;
-        this.productsSoldSession = productsSoldSession;
-        this.currentStockSession = currentStockSession;
-        this.moneyEarnedSession = moneyEarnedSession;
-        this.stockNow = stockNow;  
+    private ArrayList<String> productsAddedSession = new ArrayList<String>();
+    private ArrayList<String> productsRemovedSession = new ArrayList<String>();
+
+    
+    public ArrayList<String> getProductsAddedSession() {
+        return productsAddedSession;
     }
 
-    @Override
-    public String toString() {
-        return "Session Report:\n" +
-               "Products Added: " + productsAddedSession + "\n" +
-               "Products Removed: " + productsRemovedSession + "\n" +
-               "Products Sold: " + productsSoldSession + "\n" +
-               "Current Stock: " + currentStockSession + "\n" +
-               "Money Earned: $" + moneyEarnedSession + "\n" +
-               "stock Now: " + stockNow; 
+    public ArrayList<String> getProductsRemovedSession() {
+        return productsRemovedSession;
     }
-}
+
+    public void productsAdded(String name, int stock, double cost){
+        double MoneySpent = cost * stock;
+        String addedProduct = ("Name: "+ name +" Stock Added: "+ stock +" Money Spent: "+ MoneySpent);
+        productsAddedSession.add(addedProduct);
+        }
+
+    public void productsRemoved(String name, int stock, double sale){
+        double MoneyEarned = sale * stock;
+        String removedProduct = ("Name: "+ name +" Stock Sold: "+ stock +" Money Earned: "+ MoneyEarned);
+        productsRemovedSession.add(removedProduct);
+        }    
+
+}    

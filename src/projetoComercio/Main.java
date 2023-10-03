@@ -6,23 +6,22 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Methods operation = new Methods();
+        SessionReport save = new SessionReport();
         operation.LoadProductArrayFile();
         operation.loadFloatingCapitalFromFile();
 
+
         int option = 0;
-        int productsAddedSession = 0;
-        int productsRemovedSession = 0;
-        int productsSoldSession = 0;
-        int currentStockSession = operation.calculateTotalStock();
-        double moneyEarnedSession = 0;
-        int stockAfterSales = 0;
+        double totalProfit = 0.0;
+        double moneyEarned = 0.0;
+        double moneySpent = 0.0;
 
         System.out.println("                      [--- 🔥 WELCOME TO SILCK STYLE STORE 🔥 ---]");
         operation.Loading();
 
-        while (option != 6) {
+        while (option != 7) {
             System.out.println("\n                                 [--- MAIN MENU ---]\n");
-            System.out.println("(1) List Options (2) Register Product (3) Add Stock (4) Remove Product (5) Sell Product (6) Exit");
+            System.out.println("(1) List Options (2) Register Product (3) Add Stock (4) Remove Product (5) Sell Product (6) Session Report (7) Exit");
             option = Integer.parseInt(sc.nextLine());
             int productStock;
 
@@ -113,8 +112,6 @@ public class Main {
 
                         if (newProduct != null) {
                             operation.registerProduct(newProduct);
-                            productsAddedSession++;
-                            currentStockSession += stockQuantity;
                             operation.SaveProductsToFile(operation.getProducts());
 
                             System.out.println("Do you want to add stock?\n(1) Yes (2) No");
@@ -126,10 +123,10 @@ public class Main {
                                 if (productStock < 0) {
                                     System.out.println("It was not possible to add the product because the stock entered is negative ❌");
                                 } else {
-                                    if (operation.floatingCapital >= (newProduct.getProductCost() * productStock)) {
+                                    if (operation.getFloatingCapital() >= (newProduct.getProductCost() * productStock)) {
                                         operation.buyWithFloatingCapital((newProduct.getProductCost() * productStock));
                                         operation.addStock(productStock, productCode);
-                                        currentStockSession = operation.calculateTotalStock();
+                                        save.productsAdded(productName, productStock, productCost);
                                         System.out.print(newProduct.getName() + " added successfully.");
                                         System.out.println(" code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
                                     } else {
@@ -159,10 +156,11 @@ public class Main {
                         if (productStock < 0) {
                             System.out.println("It was not possible to add the product because the stock entered is negative ❌");
                         } else {
-                            if (operation.floatingCapital >= (operation.locatePerCode(productCode).getProductCost() * productStock)) {
+                            if (operation.getFloatingCapital() >= (operation.locatePerCode(productCode).getProductCost() * productStock)) {
                                 operation.buyWithFloatingCapital(operation.locatePerCode(productCode).getProductCost() * productStock);
                                 operation.addStock(productStock, productCode);
                                 System.out.println("Stock added successfully ✔️");
+                                save.productsAdded(operation.locatePerCode(productCode).getName(), productStock,operation.locatePerCode(productCode).getProductCost());
                                 operation.SaveProductsToFile(operation.getProducts());
                             } else {
                                 System.out.println("Not enough capital to add stock ❌");
@@ -182,7 +180,7 @@ public class Main {
                             System.out.println("Product removed successfully ✔️");
                             operation.deleteProduct(productCode);
                             operation.SaveProductsToFile(operation.getProducts());
-                            productsRemovedSession++;
+                            
                         } else {
                             System.out.println("There's still stock of this product in the market");
                             System.out.println("(1) Remove anyway (2) Cancel operation");
@@ -190,16 +188,17 @@ public class Main {
 
                             if (optionRemove == 1) {
                                 System.out.println("Product removed successfully ✔️");
+                                save.productsRemoved(operation.locatePerCode(productCode).getName(), operation.locatePerCode(productCode).getStockQuantity(),operation.locatePerCode(productCode).getSaleValue());
                                 operation.deleteProduct(productCode);
                                 operation.SaveProductsToFile(operation.getProducts());
-                                productsRemovedSession++;
+                                
                             } else {
                                 System.out.println("Operation Cancelled ❌");
                                 System.out.println("Returning...");
                             }
                         }
-                        currentStockSession = operation.calculateTotalStock();
-                        stockAfterSales = currentStockSession;
+                        
+                        
                     }
                     break;
                 case 5:
@@ -218,26 +217,37 @@ public class Main {
                             System.out.println("Returning...");
                         } else {
                             double saleValue = operation.locatePerCode(productCode).getSaleValue() * productStock;
-                            moneyEarnedSession += saleValue;
-
+                            
                             operation.sellWithFloatingCapital(saleValue);
-                            operation.removeStock(productStock, productCode);
-
-                            currentStockSession = operation.calculateTotalStock();
-                            stockAfterSales = currentStockSession;
-
+                            operation.removeStock(productStock, productCode);                           
+                            save.productsRemoved(operation.locatePerCode(productCode).getName(), productStock,operation.locatePerCode(productCode).getSaleValue());
                             operation.SaveProductsToFile(operation.getProducts());
-                            productsSoldSession += productStock;
+                            
                         }
                     }
                     break;
-                case 6:
-                    System.out.println("Exiting Silck Style Store, Thank You!");
-                    operation.saveFloatingCapitalToFile();
-                    break;
+                    case 6:
+                    operation.Loading();
+                    System.out.println("\nStock Purchased and Profit:\n");
+                    for (String added : save.getProductsAddedSession()) {
+                         String[] parts = added.split(" ");
+                        moneySpent = Double.parseDouble(parts[parts.length - 1]);
+                        System.out.println(added);
+                    }
+                    
+                    System.out.println("\nStock Sold and Profit:\n");
+                    for (String removed : save.getProductsRemovedSession()) {
+                        System.out.println(removed);
+                        String[] parts = removed.split(" ");
+                        moneyEarned = Double.parseDouble(parts[parts.length - 1]);
+                    }
+                    double profit = moneyEarned - moneySpent;
+                    totalProfit += profit;
+                    System.out.println("\nTotal Profit: " + totalProfit);
+                    break;                
                 case 7:
-                    SessionReport sessionReport = new SessionReport(productsAddedSession, productsRemovedSession, productsSoldSession, currentStockSession, moneyEarnedSession, stockAfterSales);
-                    System.out.println(sessionReport);
+                    System.out.println("\nExiting Silck Style Store, Thank You!");
+                    operation.saveFloatingCapitalToFile();
                     break;
                 default:
                     System.out.println("Invalid Option, please try again ❌");

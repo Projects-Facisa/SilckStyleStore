@@ -62,6 +62,6 @@ public class Products {
     }
     public String toStringProduct(){
         return name +
-                " (code.: " + code + " | stock: " + stockQuantity + " | category: " + category + " | product cost: " + productCost + " | sale value:" + saleValue;
+                " (code.: " + code + " | stock: " + stockQuantity + " | category: " + category + " | product cost: " + productCost + " | sale value: " + saleValue;
     }
 }

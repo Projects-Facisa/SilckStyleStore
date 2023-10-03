@@ -8,7 +8,11 @@ import java.util.Scanner;
 
 public class Methods {
 
-    public double floatingCapital = 0;
+    private double floatingCapital = 0;
+
+    public double getFloatingCapital() {
+        return floatingCapital;
+    }
 
     public void buyWithFloatingCapital(double buyValue) {
         floatingCapital -= buyValue;
@@ -164,4 +168,6 @@ public class Methods {
             System.out.println("FileCashRegister.txt not found. Floating Capital not loaded.");
         }
     }
+    
+    
 }
