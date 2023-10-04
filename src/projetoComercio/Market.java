@@ -8,11 +8,12 @@ import java.util.Scanner;
 
 public class Market {
 
-    private double floatingCapital = 0;
-
-    public double getFloatingCapital() {
-        return floatingCapital;
-    }
+    protected static double floatingCapital = 0;
+    private double moneyEarned = 0.0;
+    private double moneySpent = 0.0;
+    double totalProfit = 0.0;
+    protected ArrayList<String> productsAddedSession = new ArrayList<String>();
+    protected ArrayList<String> productsRemovedSession = new ArrayList<String>();
 
     public void buyWithFloatingCapital(double buyValue) {
         floatingCapital -= buyValue;
@@ -89,6 +90,38 @@ public class Market {
         Products product = locatePerCode(productCode);
         product.removeStockPerCode(productStock);
     }
+    public void productsAdded(String name, int stock, double cost){
+        double MoneySpent = cost * stock;
+        String addedProduct = ("Name: "+ name +" | Stock Added: "+ stock +" | Money Spent: "+ MoneySpent);
+        productsAddedSession.add(addedProduct);
+    }
+    public void productsRemoved(String name, int stock, double sale){
+        double MoneyEarned = sale * stock;
+        String removedProduct = ("Name: "+ name +" | Stock Sold: "+ stock +" | Money Earned: "+ MoneyEarned);
+        productsRemovedSession.add(removedProduct);
+    }
+    public void SessionReport(){
+        totalProfit = 0;
+        moneySpent = 0;
+        moneyEarned = 0;
+        Loading();
+        System.out.println("\nStock Purchased:\n");
+        for (String added : productsAddedSession) {
+            System.out.println(added);
+            String[] parts = added.split(" ");
+            moneySpent += Double.parseDouble(parts[parts.length - 1]);
+        }
+
+        System.out.println("\nStock Sold:\n");
+        for (String removed : productsRemovedSession) {
+            System.out.println(removed);
+            String[] parts = removed.split(" ");
+            moneyEarned +=  Double.parseDouble(parts[parts.length - 1]);
+        }
+        double profit = moneyEarned - moneySpent;
+        totalProfit += profit;
+        System.out.println("\nTotal Profit: " + totalProfit);
+    }
 
     public void Loading() {
         System.out.println("Loading...");
@@ -104,15 +137,6 @@ public class Market {
             System.err.println("Error during loading" + e.getMessage());
         }
     }
-    
-    public int calculateTotalStock() {
-        int totalStock = 0;
-        for (Products product : products) {
-            totalStock += product.getStockQuantity();
-        }
-        return totalStock;
-    }
-    
 
     public void SaveProductsToFile(ArrayList<Products> products) {
         try (PrintWriter writer = new PrintWriter("fileArray.txt")) {
@@ -157,7 +181,7 @@ public class Market {
         try (PrintWriter writer = new PrintWriter("FileCashRegister.txt")) {
             writer.write(String.valueOf(floatingCapital));
             writer.close();
-        } 
+        }
         catch (FileNotFoundException e) {
             System.out.println("Error saving Floating Capital: " + e.getMessage());
         }
@@ -174,6 +198,4 @@ public class Market {
             System.out.println("FileCashRegister.txt not found. Floating Capital not loaded.");
         }
     }
-    
-    
 }

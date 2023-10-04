@@ -5,13 +5,6 @@ public class Legs extends Products {
     private String waist;
     private String length;
 
-    public String getWaist() {
-        return waist;
-    }
-    public String getLength() {
-        return length;
-    }
-
     public Legs(int code, String name, String style, String size, String color, String material, String category, int stockQuantity, double productCost, double saleValue, String waist, String length) {
         super(code, name, style, size, color, material, category, stockQuantity, productCost, saleValue);
         this.waist = waist;
@@ -20,7 +13,7 @@ public class Legs extends Products {
     @Override
     public String toString() {
         return name +
-                " (code.: " + code + " | stock: " + stockQuantity + " | category attributes: " + " waist: " + waist + " lenght: " + length + " | product cost: " + productCost + " | sale value:" + saleValue;
+                " (code.: " + code + " | stock: " + stockQuantity + " | category attributes ->" + " waist: " + waist + ", lenght: " + length + " | product cost: " + productCost + " | sale value:" + saleValue;
     }
     @Override
     public String saveFileString() {
