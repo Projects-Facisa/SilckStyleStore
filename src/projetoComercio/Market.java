@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Methods {
+public class Market {
 
     private double floatingCapital = 0;
 
