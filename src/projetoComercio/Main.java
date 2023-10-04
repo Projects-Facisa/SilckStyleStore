@@ -111,7 +111,6 @@ public class Main {
 
                             if (newProduct != null) {
                                 operation.registerProduct(newProduct);
-                                operation.SaveProductsToFile(operation.getProducts());
 
                                 System.out.println("Do you want to add stock?\n(1) Yes (2) No");
                                 int optionStock = Integer.parseInt(sc.nextLine());
@@ -126,7 +125,7 @@ public class Main {
                                         if (Market.floatingCapital >= (newProduct.getProductCost() * productStock)) {
                                             operation.buyWithFloatingCapital((newProduct.getProductCost() * productStock));
                                             operation.addStock(productStock, productCode);
-                                            operation.productsAdded(productName, productStock, productCost);
+                                            operation.productsAdded(operation.locatePerCode(productCode).getName(), productStock, productCost);
                                             System.out.print(newProduct.getName() + " added successfully ✔️");
                                             System.out.println(" code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
                                         } else {
@@ -138,7 +137,6 @@ public class Main {
                                     System.out.print(newProduct.getName() + " added successfully ✔️");
                                     System.out.println(" code: " + newProduct.getCode() + ", " + "stock: " + newProduct.getStockQuantity() + "\n");
                                 }
-                                operation.SaveProductsToFile(operation.getProducts());
                                 }
                             }
                         }
@@ -164,7 +162,6 @@ public class Main {
                                 operation.addStock(productStock, productCode);
                                 System.out.println("Stock added successfully ✔️");
                                 operation.productsAdded(operation.locatePerCode(productCode).getName(), productStock,operation.locatePerCode(productCode).getProductCost());
-                                operation.SaveProductsToFile(operation.getProducts());
                             } else {
                                 System.out.println("Not enough capital to add stock ❌");
                             }
@@ -182,8 +179,6 @@ public class Main {
                         if (operation.locatePerCode(productCode).getStockQuantity() == 0) {
                             System.out.println("Product removed successfully ✔️");
                             operation.deleteProduct(productCode);
-                            operation.SaveProductsToFile(operation.getProducts());
-
                         } else {
                             System.out.println("There's still stock of this product in the market");
                             System.out.println("(1) Remove anyway (2) Cancel operation");
@@ -193,8 +188,6 @@ public class Main {
                                 System.out.println("Product removed successfully ✔️");
                                 operation.productsRemoved(operation.locatePerCode(productCode).getName(), operation.locatePerCode(productCode).getStockQuantity(),0);
                                 operation.deleteProduct(productCode);
-                                operation.SaveProductsToFile(operation.getProducts());
-
                             } else {
                                 System.out.println("Operation Cancelled ❌");
                                 System.out.println("Returning...");
@@ -222,7 +215,6 @@ public class Main {
                             operation.sellWithFloatingCapital(saleValue);
                             operation.removeStock(productStock, productCode);
                             operation.productsRemoved(operation.locatePerCode(productCode).getName(), productStock,operation.locatePerCode(productCode).getSaleValue());
-                            operation.SaveProductsToFile(operation.getProducts());
                             System.out.println("Stock sold successfully ✔️");
                         }
                     }
@@ -231,8 +223,10 @@ public class Main {
                     operation.SessionReport();
                     break;                
                 case 7:
-                    System.out.println("\nExiting Silck Style Store, Thank You!");
+                	operation.Saving();
+                    operation.SaveProductsToFile(operation.getProducts());
                     operation.saveFloatingCapitalToFile();
+                    System.out.println("\nExiting Silck Style Store, Thank You!");
                     break;
                 default:
                     System.out.println("Invalid Option, please try again ❌");
