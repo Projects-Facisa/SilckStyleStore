@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Market {
 
-    protected static double floatingCapital = 0;
+    protected static double floatingCapital = 1000;
     private double moneyEarned = 0.0;
     private double moneySpent = 0.0;
     double totalProfit = 0.0;
@@ -150,7 +150,7 @@ public class Market {
             }
 			writer.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + "fileArray.txt");
+            System.out.println("File not found fileArray.txt");
         }
     }
 
@@ -178,7 +178,7 @@ public class Market {
 				scan.close();
 			}
             catch (FileNotFoundException e) {
-            	System.out.println("File not found: " + "fileArray.txt");
+            	System.out.println("fileArray.txt not found, Exit to create.");
 			}
 		products = tempArray;
 	}
@@ -200,7 +200,8 @@ public class Market {
                 System.out.println("FileCashRegister.txt is empty or formatted incorrectly.");
             }
         } catch (FileNotFoundException e) {
-            System.out.println("FileCashRegister.txt not found. Floating Capital not loaded.");
+            System.out.println("FileCashRegister.txt not found, Exit to create.\nFloating Capital defined to : 1000 $");
+            
         }
     }
 }
