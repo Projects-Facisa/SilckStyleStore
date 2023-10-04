@@ -128,6 +128,11 @@ public class Market {
         LoadingDelay(1500);
         System.out.println("Loading complete ✔️");
     }
+    public void Saving() {
+        System.out.println("Saving...");
+        LoadingDelay(1500);
+        System.out.println("Saving complete ✔️");
+    }
 
     private void LoadingDelay(int milliseconds) {
         try {
