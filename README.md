@@ -1,6 +1,6 @@
 # SilckStyleStore - Java Commerce Project 👜🛒
 
-This project was developed under the guidance of Professor Armando Agra for Module 2 - Basic Object-Oriented Programming in Java. SilckStyleStore is a commerce system that provides the following functionalities:
+This project was developed under the guidance of Professor Armando Agra for Module 2 - Basic Object-Oriented Programming in Java. SilckStyleStore is a clothing store e-commerce system with built-in data persistence capabilities, offering the following functionalities:
 
 ## Features 🚀
 
@@ -14,9 +14,9 @@ This project was developed under the guidance of Professor Armando Agra for Modu
 
 ## How to Use 📋
 
-1. Clone this repository to your local environment.
-2. Open the project in your preferred Java IDE.
-3. Compile and run the program.
-4. Follow the instructions in the terminal to navigate through the functionalities.
+1. **Clone this repository to your local environment.**
+2. **Open the project in your preferred Java IDE.**
+3. **Compile and run the program.**
+4. **Follow the instructions in the terminal to navigate through the functionalities.**
 
 
